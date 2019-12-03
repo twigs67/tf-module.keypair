@@ -1,19 +1,20 @@
 # tf-module.keypair
 Terraform module for creating key pair.  This module will create the key, add the generated key to the AWS key pair list, and add the private key(pem file) into the secret manager   
 
-> Requires AWS Provider >= v1.16.0
-
 ## Usage ##
 ```hcl-terraform
 module "key-openvpn" {
   source  = "git@github.com:bluesentry/tf-module.keypair.git"
-  version = "v1.0.0"
+  version = "v2.0.0"
   name    = "openvpn"
-  tags    = "${local.tags}"
+  tags    = local.tags
 }
 ```
 
-* Note:  always reference a specific version. 
+## Terraform versions ##
+Terraform 0.12. Pin module version to ~> v2.0. Code changes are handled in `master` branch
+
+Terraform 0.11. Pin module version to ~> v1.0. Code changes are handled in `v11` branch
 
 
 ## Argument Reference ##
