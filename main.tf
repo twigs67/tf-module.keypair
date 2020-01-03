@@ -7,7 +7,7 @@ resource "tls_private_key" "default" {
 
 # Add key to AWS
 resource "aws_key_pair" "generated" {
-  depends_on = ["tls_private_key.default"]
+  depends_on = [tls_private_key.default]
   key_name   = var.name
   public_key = tls_private_key.default.public_key_openssh
 }
