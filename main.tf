@@ -15,8 +15,8 @@ resource "aws_key_pair" "generated" {
 
 # Store in secret manager
 resource "aws_secretsmanager_secret" "pem" {
-  name        = "${var.name}.pem"
-  description = "${var.name} - private key"
+  name        = "${var.name}-${random_string.name.result}"
+  description = "Keypair (${var.name}) - private key"
   tags        = var.tags
 }
 resource "aws_secretsmanager_secret_version" "pem" {
@@ -24,3 +24,8 @@ resource "aws_secretsmanager_secret_version" "pem" {
   secret_string = tls_private_key.default.private_key_pem
 }
 
+# Random characters added to secret name, making it unique and allowing plan -destory and recreate, since secrets are not deleted right away
+resource "random_string" "name" {
+  length  = 4
+  special = false
+}
